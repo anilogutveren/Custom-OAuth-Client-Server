@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="custom-oauth-rest-client" />
+        <module name="custom-oauth-resource-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="customoauth" target="17" />
+      <module name="customoauthresourceserver" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="custom-oauth-client-server-comm" options="" />
+      <module name="custom-oauth-resource-server" options="-parameters" />
+      <module name="custom-oauth-rest-client" options="-parameters" />
+      <module name="customoauth" options="-parameters" />
+      <module name="customoauthresourceserver" options="-parameters" />
+    </option>
+  </component>
+</project>
