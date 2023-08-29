@@ -1,5 +1,6 @@
 package com.anil.customoauthclient.config
 
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
@@ -21,7 +22,7 @@ class OAuth2ClientSecurityConfig {
         oAuth2AuthorizedClientService: OAuth2AuthorizedClientService
     ): OAuth2AuthorizedClientManager {
 
-        var authorizedClientProvider = OAuth2AuthorizedClientProviderBuilder.builder()
+        val authorizedClientProvider = OAuth2AuthorizedClientProviderBuilder.builder()
             .clientCredentials()
             .build()
 
@@ -36,7 +37,7 @@ class OAuth2ClientSecurityConfig {
     @Bean
     fun restTemplateBuilder(
         configurer: RestTemplateBuilderConfigurer,
-        interceptor: OAuthClientInterceptor
+        @Qualifier("custominterceptor") interceptor: OAuthClientInterceptor
     ): RestTemplateBuilder {
 
         return configurer.configure(RestTemplateBuilder())

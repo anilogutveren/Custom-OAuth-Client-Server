@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CustomoauthApplication
+class CustomOAuthApplication
 
 fun main(args: Array<String>) {
-	runApplication<CustomoauthApplication>(*args)
+	runApplication<CustomOAuthApplication>(*args)
 }

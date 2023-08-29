@@ -74,12 +74,10 @@ class CustomoauthApplicationMockTests {
                     .build()
             )
         }
-
         @Bean
         fun auth2AuthorizedClientService(clientRegistrationRepository: ClientRegistrationRepository?): OAuth2AuthorizedClientService {
             return InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository)
         }
-
         @Bean
         fun oAuthClientInterceptor(
             manager: OAuth2AuthorizedClientManager,

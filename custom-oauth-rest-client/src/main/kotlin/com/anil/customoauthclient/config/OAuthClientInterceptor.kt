@@ -1,5 +1,6 @@
 package com.anil.customoauthclient.config
 
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpRequest
 import org.springframework.http.client.ClientHttpRequestExecution
@@ -14,17 +15,16 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.stereotype.Component
 
 @Component
-class OAuthClientInterceptor : ClientHttpRequestInterceptor {
+@Qualifier("custominterceptor")
+class OAuthClientInterceptor(
+    private var manager: OAuth2AuthorizedClientManager,
+    clientRegistrationRepository: ClientRegistrationRepository
+) : ClientHttpRequestInterceptor {
 
-    private var manager: OAuth2AuthorizedClientManager
-    private var principal: Authentication
-    private var clientRegistration: ClientRegistration
+    private lateinit var principal: Authentication
+    private lateinit var clientRegistration: ClientRegistration
 
-    constructor(
-        manager: OAuth2AuthorizedClientManager,
-        clientRegistrationRepository: ClientRegistrationRepository
-    ) {
-        this.manager = manager
+    init {
         this.principal = createPrincipal()
         this.clientRegistration = clientRegistrationRepository.findByRegistrationId("springauth")
     }
@@ -40,8 +40,6 @@ class OAuthClientInterceptor : ClientHttpRequestInterceptor {
             .build()
 
         val client = manager.authorize(oAuth2AuthorizeRequest)
-
-
 
         if (client != null) {
             request.headers.add(
@@ -59,35 +57,33 @@ class OAuthClientInterceptor : ClientHttpRequestInterceptor {
 
     private fun createPrincipal(): Authentication {
         return object : Authentication {
-            override fun getAuthorities(): Collection<out GrantedAuthority> {
-                return emptySet()
+            override fun getName(): String {
+                TODO("Not yet implemented")
             }
 
-            override fun getCredentials(): Any? {
-                return null
+            override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+                TODO("Not yet implemented")
             }
 
-            override fun getDetails(): Any? {
-                return null
+            override fun getCredentials(): Any {
+                TODO("Not yet implemented")
+            }
+
+            override fun getDetails(): Any {
+                TODO("Not yet implemented")
             }
 
             override fun getPrincipal(): Any {
-                return this
+                TODO("Not yet implemented")
             }
 
             override fun isAuthenticated(): Boolean {
-                return false
+                TODO("Not yet implemented")
             }
 
             override fun setAuthenticated(isAuthenticated: Boolean) {
-                // Do nothing
-            }
-
-            override fun getName(): String {
-                return clientRegistration.clientId
+                TODO("Not yet implemented")
             }
         }
     }
-
-
 }
